@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #41b3e7, #ece8e8, #41b3e7);
+            font-family: 'Oswald', sans-serif;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            background: linear-gradient(135deg,#538ac9, #032750);
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
+        }
+
+        h2 {
+            color: #f7f7f7;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-label {
+            color: #ccc;
+            font-weight: 500;
+        }
+
+        .form-control {
+            background-color: #2b2b2b;
+            color: #fff;
+            border: 1px solid #444;
+            border-radius: 8px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #23f5eb;
+            box-shadow: 0 0 8pxr rgba(0, 255, 242, 0.74);
+        }
+
+        .btn-primary {
+            background-color: #f5a623;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #000;
+            box-shadow: 0 4px 10px rgba(245, 166, 35, 0.4);
+            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #ffa500;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 165, 0, 0.5);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .floating-bubbles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .floating-bubbles span {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background: rgba(16, 74, 236, 0.308);
+            border-radius: 50%;
+            animation: bubble 15s infinite ease-in-out;
+        }
+
+        .floating-bubbles span:nth-child(2) {
+            width: 35px;
+            height: 35px;
+            animation-duration: 12s;
+            left: 25%;
+        }
+
+        .floating-bubbles span:nth-child(3) {
+            width: 30px;
+            height: 30px;
+            animation-duration: 18s;
+            left: 75%;
+        }
+
+        @keyframes bubble {
+            0% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10%);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Bubbles -->
+    <div class="floating-bubbles">
+        <span style="left: 20%; animation-delay: 2s;"></span>
+        <span style="left: 40%; animation-delay: 4s;"></span>
+        <span style="left: 60%; animation-delay: 6s;"></span>
+        <span style="left: 80%; animation-delay: 8s;"></span>
+    </div>
+
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+       
+        <div class="card" style="width: 100%; max-width: 400px;">
+            <h2>
+                <i class="fas fa-user-circle"></i> Iniciar Sesión
+            </h2>
+
+            <!-- Mostrar mensaje de error -->
+            <div th:if="${error}" class="alert alert-danger text-center" role="alert" th:text="${error}"></div>
+
+            <!-- Formulario de Login -->
+            <form action="/login" method="POST">
+                <div class="mb-3">
+                    <label for="correo" class="form-label">
+                        <i class="fas fa-envelope"></i> Correo
+                    </label>
+                    <input type="email" class="form-control" id="correo" name="correo" placeholder="Ingrese su correo" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">
+                        <i class="fas fa-lock"></i> Contraseña
+                    </label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Ingrese su contraseña" required>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Font Awesome JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Detalle de Orden</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #40edf3, #326deb);
+            color: #ffffff;
+            font-family: 'Russo One', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: #333333;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #ffaa00;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-label {
+            color: #ffaa00;
+            font-weight: bold;
+        }
+
+        .form-control, .form-select {
+            background-color: #444444;
+            color: #ffffff;
+            border: 1px solid #555555;
+            border-radius: 8px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .form-control::placeholder {
+            color: #bbbbbb;
+        }
+
+        .btn-primary {
+            background-color: #ffaa00;
+            color: #2b2b2b;
+            font-weight: bold;
+            border: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #cc8800;
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(255, 170, 0, 0.6);
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: #ffffff;
+            font-weight: bold;
+            border: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(108, 117, 125, 0.6);
+        }
+
+        .alert {
+            font-size: 1rem;
+            color: #fff;
+            background-color: #d32f2f;
+            border: none;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .btn-icon i {
+            margin-right: 5px;
+        }
+
+        /* Asegurarse de que las columnas se vean bien */
+        .col-md-6 {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1><i class="fas fa-edit"></i> Editar Detalle de Orden</h1>
+
+    <!-- Mostrar mensajes de error -->
+    <div class="alert" role="alert" style="display: none;" id="error-message">
+        <!-- Mensaje de error será insertado aquí -->
+    </div>
+
+    <!-- Formulario de edición -->
+    <form action="/detalleorden/guardar" method="POST" class="row g-4">
+        <!-- Usar 'th:value' para mostrar los datos de la entidad 'detalleorden' -->
+        <div class="col-md-6">
+            <label for="idDetalle" class="form-label"><i class="fas fa-hashtag"></i> ID Detalle</label>
+            <input type="text" id="idDetalle" name="idDetalle" class="form-control" th:value="${detallesOrden.idDetalle}" placeholder="ID Detalle" readonly>
+        </div>
+        <div class="col-md-6">
+            <label for="idOrden" class="form-label"><i class="fas fa-list-alt"></i> ID Orden</label>
+            <input type="text" id="idOrden" name="idOrden" class="form-control" th:value="${detallesOrden.Orden.idOrden}" placeholder="ID Orden" required>
+        </div>
+        <div class="col-md-6">
+            <label for="producto" class="form-label"><i class="fas fa-cogs"></i> Producto</label>
+            <input type="text" id="producto" name="producto" class="form-control" th:value="${detallesOrden.producto.nombre}" placeholder="Nombre del producto" required>
+        </div>
+        <div class="col-md-6">
+            <label for="cantidad" class="form-label"><i class="fas fa-cogs"></i> Cantidad</label>
+            <input type="number" id="cantidad" name="cantidad" class="form-control" th:value="${detallesOrden.cantidad}" placeholder="Cantidad" required>
+        </div>
+        <div class="col-md-6">
+            <label for="precioUnitario" class="form-label"><i class="fas fa-dollar-sign"></i> Precio Unitario</label>
+            <input type="number" id="precioUnitario" name="precioUnitario" class="form-control" th:value="${detallesOrden.precioUnitario}" placeholder="Precio Unitario" step="0.01" required>
+        </div>
+
+        <div class="col-12 text-center">
+            <button type="submit" class="btn btn-primary btn-icon w-50">
+                <i class="fas fa-save"></i> Guardar Cambios
+            </button>
+        </div>
+    </form>
+
+    <div class="text-center mt-4">
+        <a href="/detalleorden/iniciodetalle" class="btn btn-secondary btn-icon">
+            <i class="fas fa-arrow-left"></i> Volver a la lista de detalles
+        </a>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+</body>
+</html>
